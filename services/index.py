@@ -1,17 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import pika
 
-from __future__ import print_function
-import time
-from flask import Flask
+# establish connection and chanel
+connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+channel = connection.channel()
 
-app = Flask(__name__)
+# Declare queue
+# This is the channel on which communications will be held
+channel.queue_declare(queue='main')
 
-@app.route("/")
-def hello():
-    return "Hello World! This is powered by Python backend."
+# Pubish message
+channel.basic_publish(exchange='',
+                      routing_key='main',   # this is the chanel name
+                      body='Hello World!')  # message
+# Log the message in the console
+print(" [x] Sent 'Hello World!'")
 
-if __name__ == "__main__":
-    print('oh hello')
-    #time.sleep(5)
-    app.run(host='127.0.0.1', port=5000)
+# always close the connection
+connection.close()

@@ -24,6 +24,7 @@
     "request-promise": "^4.2.2"
   },
   "dependencies": {
+    "amqplib": "^0.5.2",
     "babel-preset-react": "^6.24.1"
   }
 }
