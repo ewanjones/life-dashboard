@@ -26,6 +26,16 @@ source venv/bin/activate
 ./index.py
 ```
 
+## Project Structure
+```
+- app       # the electron project - hosts the webpack app
+- auth      # the main auth scripts for accounts
+- config    # various config files and constants
+- react     # the react app
+- services  # python scripts for data analysis
+- static    # where the webpack bundle is generated
+- venv      # the python virtualenv
+```
 
 ## Architecture
 There are two parts to the app the electron app (frontend) and the python end (backend). These two entities communicate via rabbitmq which can is initialised and channel name 'main is declared'.
