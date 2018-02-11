@@ -2,9 +2,9 @@
   "name": "electron-quick-start",
   "version": "1.0.0",
   "description": "A minimal Electron application",
-  "main": "index.js",
+  "main": "./index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --watch --config ./config/webpack.config.js",
     "dash": "electron ."
   },
   "repository": "https://github.com/electron/electron-quick-start",
@@ -22,17 +22,16 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "electron": "~1.7.8",
     "electron-compile": "^6.4.2",
     "electron-compilers": "^5.9.0",
     "electron-prebuilt-compile": "^1.7.11",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "request-promise": "^4.2.2",
     "webpack": "^3.11.0"
   },
   "dependencies": {
-    "amqplib": "^0.5.2",
-    "babel-preset-react": "^6.24.1"
+    "amqplib": "^0.5.2"
   }
 }

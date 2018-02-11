@@ -1,8 +1,11 @@
 const path = require("path");
+const rootDir = path.resolve(__dirname, '../')
+console.log(rootDir)
+
 module.exports = {
-  entry: ["./react/app.jsx"],
+  entry: [path.resolve(rootDir, "react/index.js")],
   output: {
-    path: path.resolve(__dirname, "static"),
+    path: path.resolve(rootDir, "static/"),
     filename: "[name].bundle.js"
   },
   module: {
@@ -11,7 +14,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: "babel-loader",
+          options: {
+              presets: ["env", "stage-0", "react"]
+          }
         }
       }
     ]
