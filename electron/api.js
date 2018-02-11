@@ -2,32 +2,43 @@
 
 var amqp = require('amqplib/callback_api');
 
-// connect to channel
-// amqp.connect('amqp://localhost', function(err, conn) {
-//   conn.createChannel(function(err, ch) {
-//     var queue = 'main';
-//
-//     ch.assertQueue(queue, {durable: false});
-//     // Note: on Node 6 Buffer.from(msg) should be used
-//     ch.sendToQueue(q, new Buffer('Hello World!'));
-//     console.log(" [x] Sent 'Hello World!'");
-//   });
-// });
+var args = process.argv.slice(2);
+
+if (args.length == 0) {
+  console.log("Usage: rpc_client.js num");
+  process.exit(1);
+}
 
 amqp.connect('amqp://localhost', function(err, conn) {
-    try {
-        conn.createChannel(function(err, ch) {
-            var queue = 'main';
+    conn.createChannel(function(err, ch) {
+        ch.assertQueue('', {exclusive: true}, function(err, q) {
+            // correlation id
+            var corr = generateUuid();
+            var num = parseInt(args[0]);
 
-            ch.assertQueue(queue, {durable: false});
-            console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
+            console.log(' [x] Requesting fib(%d)', num);
 
-            ch.consume(queue, function(msg) {
-                console.log(" [x] Received %s", msg.content.toString());
+            // listen for replies before sending request
+            ch.consume(q.queue, function(response) {
+                // check that correlation id matches before processing
+                if (response.properties.correlationId == corr) {
+                    // handle response here
+                    console.log(' [.] Got %s', response.content.toString());
+                    setTimeout(function() { conn.close(); process.exit(0) }, 500);
+                }
             }, {noAck: true});
+
+            ch.sendToQueue(
+                'main',                                     // queue name
+                new Buffer(num.toString()),                 // request body
+                { correlationId: corr, replyTo: q.queue }   // request properties
+            );
         });
-    }
-    catch(err) {
-        console.log('Connection error: ' + err)
-    }
+    });
 });
+
+function generateUuid() {
+  return Math.random().toString() +
+         Math.random().toString() +
+         Math.random().toString();
+}
