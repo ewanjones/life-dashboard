@@ -15,6 +15,11 @@ rabbitmq-server
 ```
 **NOTE:** You may need to add  ```export PATH="/usr/local/sbin:$PATH"``` to your .bash_profile in order to run this command
 
+Stop the server with:
+```
+rabbitmqctl stop
+```
+
 #### Run the API scripts
 For electron:
 ```

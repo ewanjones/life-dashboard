@@ -18,6 +18,7 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "amqplib": "^0.5.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
@@ -27,13 +28,13 @@
     "electron-compile": "^6.4.2",
     "electron-compilers": "^5.9.0",
     "electron-prebuilt-compile": "^1.7.11",
+    "net": "^1.0.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
+    "tls": "0.0.1",
     "webpack": "^3.11.0"
   },
-  "dependencies": {
-    "amqplib": "^0.5.2"
-  }
+  "dependencies": {}
 }

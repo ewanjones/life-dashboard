@@ -39,7 +39,6 @@ function openWindow () {
 
 	// Open the DevTools.
 	mainWindow.webContents.openDevTools()
-	console.log('hello')
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', function () {
