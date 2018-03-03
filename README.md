@@ -37,6 +37,8 @@ source venv/bin/activate
 - auth      # the main auth scripts for accounts
 - config    # various config files and constants
 - react     # the react app
+    - assets
+    - store
 - services  # python scripts for data analysis
 - static    # where the webpack bundle is generated
 - venv      # the python virtualenv

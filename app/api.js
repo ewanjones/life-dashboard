@@ -1,6 +1,5 @@
-#!/usr/bin/env node
-
 var amqp = require('amqplib/callback_api');
+
 
 function ajaxRequest(payload) {
     let json = JSON.stringify(payload)

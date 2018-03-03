@@ -1,15 +1,18 @@
+const electron = require('electron')
 import {parse} from 'url'
 import {remote} from 'electron'
 import axios from 'axios'
 import qs from 'qs'
 
-const config from './config.js'
+import config from '../config/config.js'
 
 const GOOGLE_AUTHORIZATION_URL = 'https://accounts.google.com/o/oauth2/v2/auth'
 const GOOGLE_TOKEN_URL = 'https://www.googleapis.com/oauth2/v4/token'
 const GOOGLE_PROFILE_URL = 'https://www.googleapis.com/userinfo/v2/me'
 const GOOGLE_CLIENT_ID = config.clientId
+const GOOGLE_REDIRECT_URI = 'https://127.0.0.1:8000'
 
+// this is the main function
 export async function googleSignIn (callback) {
   const code = await signInWithPopup()
   const tokens = await fetchAccessTokens(code)
@@ -29,7 +32,7 @@ export async function googleSignIn (callback) {
 
 export function signInWithPopup () {
   return new Promise((resolve, reject) => {
-    const authWindow = new remote.BrowserWindow({
+    const authWindow = new electron.BrowserWindow({
       width: 500,
       height: 600,
       show: true,
@@ -45,19 +48,20 @@ export function signInWithPopup () {
     const authUrl = `${GOOGLE_AUTHORIZATION_URL}?${qs.stringify(urlParams)}`
 
     function handleNavigation (url) {
-	const query = parse(url, true).query
-      if (query) {
-        if (query.error) {
-          reject(new Error(`There was an error: ${query.error}`))
-        } else if (query.code) {
-          // Login is complete
-          authWindow.removeAllListeners('closed')
-          setImmediate(() => authWindow.close())
+        const query = parse(url, true).query
+        if (query) {
+            if (query.error) {
+                reject(new Error(`There was an error: ${query.error}`))
+            }
+            else if (query.code) {
+                // Login is complete
+                authWindow.removeAllListeners('closed')
+                setImmediate(() => authWindow.close())
 
-          // This is the authorization code we need to request tokens
-          resolve(query.code)
+                // This is the authorization code we need to request tokens
+                resolve(query.code)
+            }
         }
-      }
     }
 
     authWindow.on('closed', () => {

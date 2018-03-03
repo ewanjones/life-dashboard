@@ -4,7 +4,7 @@ console.log(rootDir)
 
 module.exports = {
     devtool: 'source-map',
-    entry: [path.resolve(rootDir, "react/index.js")],
+    entry: [path.resolve(rootDir, "react/index.jsx")],
     output: {
         path: path.resolve(rootDir, "static/"),
         filename: "[name].bundle.js"

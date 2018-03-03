@@ -2,7 +2,7 @@ const electron = require('electron')
 
 const path = require('path')
 const url = require('url')
-// const auth = require('./auth/auth.js')
+const auth = require('../auth/auth.js')
 
 // const {enableLiveReload} from 'electron-compile';
 
@@ -20,22 +20,15 @@ function openWindow () {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({width: 800, height: 600})
 
-
-
-
-	// and load the index.html of the app.
-	mainWindow.loadURL(url.format({
-	  pathname: path.join(__dirname, './index.html'),
-	  protocol: 'file:',
-	  slashes: true
-	}))
-
-
-	// load flask app html
-	// mainWindow.loadURL(path.resolve('./app/index.html'))
-
 	// get google authorisation
-	// googleUser = auth.googleSignIn()
+	auth.googleSignIn(() => {
+		// load main window url
+		mainWindow.loadURL(url.format({
+		  pathname: path.join(__dirname, './index.html'),
+		  protocol: 'file:',
+		  slashes: true
+		}))
+	})
 
 	// Open the DevTools.
 	mainWindow.webContents.openDevTools()

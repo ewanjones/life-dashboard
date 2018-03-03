@@ -1,4 +1,4 @@
-import sendAjax from './api'
+import sendAjax from '../../app/api.js'
 
 let response = sendAjax({'message': 'hey'})
 
