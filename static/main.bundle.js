@@ -20934,13 +20934,13 @@ Object.defineProperty(exports, "__esModule", {
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var dashStore = function dashStore() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { working: null };
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { user: 'hello' };
   var action = arguments[1];
 
   switch (action.type) {
-    case 'SET_WORKING':
+    case 'SET_USER':
       return _extends({}, state, {
-        state: action.value
+        user: action.user.email
       });
     default:
       return state;
@@ -20997,7 +20997,8 @@ var App = function (_Component) {
                 _react2.default.createElement(
                     'h2',
                     null,
-                    'Hello World'
+                    'Hello ',
+                    this.props.user
                 ),
                 _react2.default.createElement(
                     'button',
@@ -21013,26 +21014,12 @@ var App = function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
     return {
-        working: state.working
+        user: state.user
     };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    return {
-        setWorking: function (_setWorking) {
-            function setWorking() {
-                return _setWorking.apply(this, arguments);
-            }
-
-            setWorking.toString = function () {
-                return _setWorking.toString();
-            };
-
-            return setWorking;
-        }(function () {
-            dispatch(setWorking());
-        })
-    };
+    return {};
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);

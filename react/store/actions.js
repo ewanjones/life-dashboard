@@ -2,9 +2,10 @@
 //
 // let response = sendAjax({'message': 'hey'})
 //
-// export const setWorking = () => {
-//     return {
-//         type: 'SET_WORKING',
-//         value: response.message
-//     }
-// }
+export const setUser = (user) => {
+     console.log(user)
+    return {
+        type: 'SET_USER',
+        user: user
+    }
+}

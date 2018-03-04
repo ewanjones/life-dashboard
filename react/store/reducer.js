@@ -1,11 +1,11 @@
 
 
-const dashStore = (state = {working: null}, action) => {
+const dashStore = (state = {user: 'hello'}, action) => {
   switch (action.type) {
-    case 'SET_WORKING':
+    case 'SET_USER':
       return {
         ...state,
-        state: action.value
+        user: action.user.email
     }
     default:
       return state

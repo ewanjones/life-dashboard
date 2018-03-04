@@ -3,8 +3,10 @@
 // All of the Node.js APIs are available in this process.
 
 var ipcRenderer = require('electron').ipcRenderer;
+import {setUser} from './store/actions.js'
 
 
 ipcRenderer.on('user-data', function(event, arg) {
   console.log(arg);
+  setUser(arg)
 });

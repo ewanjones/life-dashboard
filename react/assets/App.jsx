@@ -9,7 +9,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <h2>Hello World</h2>
+                <h2>Hello {this.props.user}</h2>
                 <button onClick={() => {}}>Work</button>
             </div>
         )
@@ -17,13 +17,11 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    working: state.working
+    user: state.user
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    setWorking: () => {
-        dispatch(setWorking())
-    }
+
 })
 
 export default connect(

@@ -24,17 +24,18 @@ function openWindow () {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({width: 800, height: 600})
 
+	// load main window url
+	mainWindow.loadURL(url.format({
+	  pathname: path.join(__dirname, '../react/index.html'),
+	  protocol: 'file:',
+	  slashes: true
+	}))
+
 	// get google authorisation
 	auth.googleSignIn((user) => {
-		console.log(user)
-		ipcMain.send('user-data', user);
+		console.log('loading app')
 
-		// load main window url
-		mainWindow.loadURL(url.format({
-		  pathname: path.join(__dirname, './index.html'),
-		  protocol: 'file:',
-		  slashes: true
-		}))
+		mainWindow.webContents.send('user-data', user)
 	})
 
 
