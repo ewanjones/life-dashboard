@@ -17,14 +17,14 @@ export async function googleSignIn (callback) {
   const code = await signInWithPopup()
   const tokens = await fetchAccessTokens(code)
   const {id, email, name} = await fetchGoogleProfile(tokens.access_token)
-  const providerUser = {
+  const user = {
     uid: id,
     email,
     displayName: name,
     idToken: tokens.id_token,
   }
 
-  return callback(providerUser)
+  return callback(user)
 }
 
 

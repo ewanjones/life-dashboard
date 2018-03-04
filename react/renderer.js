@@ -2,7 +2,9 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-var ipcRenderer = require(‘electron’).ipcRenderer;
+var ipcRenderer = require('electron').ipcRenderer;
 
 
-const 
+ipcRenderer.on('user-data', function(event, arg) {
+  console.log(arg);
+});

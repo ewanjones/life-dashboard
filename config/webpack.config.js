@@ -1,14 +1,18 @@
+const webpack = require('webpack')
 const path = require("path");
 const rootDir = path.resolve(__dirname, '../')
-console.log(rootDir)
 
-module.exports = {
+
+let config = {
     devtool: 'source-map',
     entry: [path.resolve(rootDir, "react/index.jsx")],
     output: {
         path: path.resolve(rootDir, "static/"),
         filename: "[name].bundle.js"
     },
+    plugins: [
+        new webpack.IgnorePlugin(new RegExp("^(fs|ipc)$"))
+    ],
     module: {
         rules: [
             {
@@ -22,5 +26,8 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    target: "electron"
 };
+
+module.exports = config

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { setWorking } from '../store/actions'
+// import { setWorking } from '../store/actions'
 
 
 
@@ -9,8 +9,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                <h2>Hello World - {this.props.working}</h2>
-                <button onClick={() => this.props.setWorking()}>Work</button>
+                <h2>Hello World</h2>
+                <button onClick={() => {}}>Work</button>
             </div>
         )
     }

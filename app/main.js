@@ -3,6 +3,10 @@ const electron = require('electron')
 const path = require('path')
 const url = require('url')
 const auth = require('../auth/auth.js')
+var ipcMain = require('electron').ipcMain;
+
+// import sendAjax from './rabbitmq.js'
+
 
 // const {enableLiveReload} from 'electron-compile';
 
@@ -21,7 +25,10 @@ function openWindow () {
 	mainWindow = new BrowserWindow({width: 800, height: 600})
 
 	// get google authorisation
-	auth.googleSignIn(() => {
+	auth.googleSignIn((user) => {
+		console.log(user)
+		ipcMain.send('user-data', user);
+
 		// load main window url
 		mainWindow.loadURL(url.format({
 		  pathname: path.join(__dirname, './index.html'),
@@ -30,30 +37,18 @@ function openWindow () {
 		}))
 	})
 
+
 	// Open the DevTools.
 	mainWindow.webContents.openDevTools()
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', function () {
-	// Dereference the window object, usually you would store windows
-	// in an array if your app supports multi windows, this is the time
-	// when you should delete the corresponding element.
-	mainWindow = null
+		// Dereference the window object, usually you would store windows
+		// in an array if your app supports multi windows, this is the time
+		// when you should delete the corresponding element.
+		mainWindow = null
 	})
 }
-
-// var startUp = function(){
-//     // request html served by flask
-//     rq(mainAddr)
-//       .then(function(htmlString){
-//         console.log('server started!');
-//         openWindow();
-//       })
-//       .catch(function(err){
-//         console.log('waiting for the server start...');
-//         startUp();
-//       });
-//   };
 
 
 // -----------------
