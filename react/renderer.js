@@ -4,9 +4,19 @@
 
 var ipcRenderer = require('electron').ipcRenderer;
 import {setUser} from './store/actions.js'
+import { dispatch } from 'redux';
+import { store } from './store/store.js'
 
 
-ipcRenderer.on('user-data', function(event, arg) {
-  console.log(arg);
-  setUser(arg)
-});
+
+// ipcRenderer.on('user-data', function(event, user) {
+//     console.log(user);
+// });
+
+
+export const ipcDispatchListener = (dispatch, getState) => {
+    ipcRenderer.on('user-data', function(event, user) {
+        console.log(user);
+        dispatch(setUser(user))
+    });
+}

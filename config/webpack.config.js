@@ -21,7 +21,7 @@ let config = {
                 use: {
                     loader: "babel-loader",
                     options: {
-                        presets: ["env", "stage-0", "react"]
+                        presets: ["env", "stage-2", "react"]
                     }
                 }
             }

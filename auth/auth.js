@@ -36,6 +36,7 @@ export function signInWithPopup () {
       width: 500,
       height: 600,
       show: true,
+      alwaysOnTop: true
     })
 
     // TODO: Generate and validate PKCE code_challenge value

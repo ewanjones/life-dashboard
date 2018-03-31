@@ -9,7 +9,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <h2>Hello {this.props.user}</h2>
+                <h2>Hello {this.props.user.displayName}</h2>
                 <button onClick={() => {}}>Work</button>
             </div>
         )
