@@ -8,15 +8,6 @@ import { dispatch } from 'redux';
 import { store } from './store/store.js'
 
 
-
-// ipcRenderer.on('user-data', function(event, user) {
-//     console.log(user);
-// });
-
-
-export const ipcDispatchListener = (dispatch, getState) => {
-    ipcRenderer.on('user-data', function(event, user) {
-        console.log(user);
-        dispatch(setUser(user))
-    });
-}
+ipcRenderer.on('user-data', function(event, user) {
+    console.log(user);
+});
