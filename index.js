@@ -1,5 +1,5 @@
 const path = require('path')
-// const main = require('./app.js')
+
 var babelPolyfill = require('babel-polyfill')
 var appRoot = path.join(__dirname);
 

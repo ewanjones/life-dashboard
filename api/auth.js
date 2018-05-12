@@ -35,7 +35,10 @@ export function signInWithPopup () {
       width: 500,
       height: 600,
       show: true,
-      alwaysOnTop: true
+      alwaysOnTop: true,
+      webPreferences: {
+          nodeIntegration: false
+      }
     })
 
     // TODO: Generate and validate PKCE code_challenge value
@@ -43,7 +46,7 @@ export function signInWithPopup () {
       response_type: 'code',
       redirect_uri: GOOGLE_REDIRECT_URI,
       client_id: GOOGLE_CLIENT_ID,
-      scope: 'profile email',
+      scope: 'profile',
     }
     const authUrl = `${GOOGLE_AUTHORIZATION_URL}?${qs.stringify(urlParams)}`
 
@@ -65,8 +68,7 @@ export function signInWithPopup () {
     }
 
     authWindow.on('closed', () => {
-      // TODO: Handle this smoothly
-      throw new Error('Auth window was closed by user')
+      // throw new Error('Auth window was closed by user')
     })
 
     authWindow.webContents.on('will-navigate', (event, url) => {
@@ -83,17 +85,17 @@ export function signInWithPopup () {
 
 
 export async function fetchAccessTokens (code) {
-  const response = await axios.post(GOOGLE_TOKEN_URL, qs.stringify({
-    code,
-    client_id: GOOGLE_CLIENT_ID,
-    redirect_uri: GOOGLE_REDIRECT_URI,
-    grant_type: 'authorization_code',
-  }), {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-  })
-  return response.data
+    const response = await axios.post(GOOGLE_TOKEN_URL, qs.stringify({
+        code,
+        client_id: GOOGLE_CLIENT_ID,
+        redirect_uri: GOOGLE_REDIRECT_URI,
+        grant_type: 'authorization_code',
+    }), {
+        headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+    return response.data
 }
 
 
