@@ -1,14 +1,11 @@
 const electron = require('electron')
-
 const path = require('path')
 const url = require('url')
-const auth = require('../auth/auth.js')
-var ipcMain = require('electron').ipcMain;
+const ipcMain = require('electron').ipcMain;
+import { enableLiveReload } from 'electron-compile';
 
-// import sendAjax from './rabbitmq.js'
-
-
-// const {enableLiveReload} from 'electron-compile';
+const auth = require('../api/auth.js')
+import config from '../config/config.js'
 
 // Module to control application life.
 const app = electron.app
@@ -20,8 +17,9 @@ let mainWindow
 
 
 
-function openWindow () {
+function initiate () {
 	// Create the browser window.
+	enableLiveReload()
 	mainWindow = new BrowserWindow({width: 800, height: 600})
 
 	// load main window url
@@ -31,12 +29,12 @@ function openWindow () {
 	  slashes: true
 	}))
 
-	// get google authorisation
-	auth.googleSignIn((user) => {
-		console.log('loading app')
-
-		mainWindow.webContents.send('user-data', user)
-	})
+	if (config.SIGNUP_REQUIRED) {
+		// get google authorisation
+		auth.googleSignIn((user) => {
+			mainWindow.webContents.send('user-data', user)
+		})
+	}
 
 
 	// Open the DevTools.
@@ -59,7 +57,7 @@ function openWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', openWindow)
+app.on('ready', initiate)
 
 
 // Quit when all windows are closed.

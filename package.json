@@ -7,15 +7,12 @@
     "build": "webpack --watch --config ./config/webpack.config.js",
     "dash": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/paxthree/life-dashboard",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Life Dashboard",
+    "Productivity"
   ],
-  "author": "GitHub",
+  "author": "Ewan Jones",
   "license": "CC0-1.0",
   "devDependencies": {
     "amqplib": "^0.5.2",
@@ -28,7 +25,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "electron": "~1.7.8",
+    "electron": "2.0.0",
     "electron-compile": "^6.4.2",
     "electron-compilers": "^5.9.0",
     "electron-prebuilt-compile": "^1.7.11",
@@ -38,6 +35,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "tls": "0.0.1",
     "webpack": "^3.11.0",
     "webpack-target-electron-renderer": "^0.4.0"

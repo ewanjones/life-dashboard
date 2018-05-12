@@ -12,6 +12,7 @@ const GOOGLE_PROFILE_URL = 'https://www.googleapis.com/userinfo/v2/me'
 const GOOGLE_CLIENT_ID = config.clientId
 const GOOGLE_REDIRECT_URI = 'https://127.0.0.1:8000'
 
+
 // this is the main function
 export async function googleSignIn (callback) {
   const code = await signInWithPopup()
@@ -26,8 +27,6 @@ export async function googleSignIn (callback) {
 
   return callback(user)
 }
-
-
 
 
 export function signInWithPopup () {
