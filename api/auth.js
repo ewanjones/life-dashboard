@@ -46,7 +46,7 @@ export function signInWithPopup () {
       response_type: 'code',
       redirect_uri: GOOGLE_REDIRECT_URI,
       client_id: GOOGLE_CLIENT_ID,
-      scope: 'profile',
+      scope: 'profile email',
     }
     const authUrl = `${GOOGLE_AUTHORIZATION_URL}?${qs.stringify(urlParams)}`
 
@@ -78,7 +78,7 @@ export function signInWithPopup () {
     authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
       handleNavigation(newUrl)
     })
-
+    console.log(authUrl)
     authWindow.loadURL(authUrl)
   })
 }
